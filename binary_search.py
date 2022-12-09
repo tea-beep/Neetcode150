@@ -1,6 +1,5 @@
-#ex cards [13,12,11,7,6,3,2,0]
-#query #3
 import math
+#generic array for testing binary searches.
 test = {
         'inputs':{
             'nums': [-1,0,1,2,3,5,9,12],
@@ -9,42 +8,46 @@ test = {
         ,'output':{
             'position': 3
         }
-
-
 }
+#test for Koko eating bananas problem
 testNanners ={
     'inputs':{
         'piles': [3,6,7,11],
         'h' : 4
     }
 }
+#test for 2D matrix problem
 test2dMatrix ={
     'inputs':{
         'matrix': [[1,3,5,7],[10,11,16,20],[23,30,34,60]], 
         'target': 34
     }
 }
+#test for find min in rotated array proble,
 testFindMin ={
     'inputs':{
         'nums': [3,4,5,1,2]
     }
 }
 
-def locate_card_brute(cards, query):
-  #  position = 0
-    print(cards)
-    print(query)
-    for i in range(0, len(cards)):
+
+
+def brute_search(nums, target):
+    #brute force search
+    #position = 0
+    print(nums)
+    print(target)
+    for i in range(0, len(nums)):
         
-        if cards[i] == query:
+        if nums[i] == target:
             return i
             
-        if i == len(cards):
+        if i == len(nums):
             return -1
 
 
-
 def binary_search(nums,target):
+    #simple binary search!
     #need to find midpoint of the length of cards as starting check
     hi = len(nums) - 1
     lo = 0
@@ -63,6 +66,13 @@ def binary_search(nums,target):
 
 
 def rotated_binary_search(nums,target):
+    #find a value in a given rotated binary array.
+    #rotated means that the center is shifted in the array
+    #by some number we don't know.
+    #rotated looks like this: [3,4,5,1,2]
+    #in numeric order, but not L-R across the array.
+    #the zero point is shifted.
+
     # len(nums) - 1, because for ex list= [1,2,3,4], len(list) = 4, list(4) out of bounds.
     hi = len(nums) -1
     lo = 0
@@ -88,6 +98,7 @@ def rotated_binary_search(nums,target):
     #not found in array!
     return -1
 
+
 def minEatingSpeed(piles, h):
         #n nanners, 
         #guards back in h hours.
@@ -96,13 +107,10 @@ def minEatingSpeed(piles, h):
 
         #k = bananas per hour, every hour a pile is selected and k bananas are eaten.
         # if piles[i] has less than k bananas, piles[i] becomes 0.
-
         #find and return k such that she can eat all bananas in h hours.
-
-
         #piles = [3,6,7,11] 4 = 8
         # k = 4...  6 - 4 = 2, k = 1, 2 - 4 = 0, k = 2. done.
-                    # 3 - 4 = 0 k = 3, done. 7 -4 , 3 - 4 k = 
+                    # 3 - 4 = 0 k = 3, done. 7 -4 , 3 - 4 k = ... etc.
     low = 0
     high = max(piles)
     while high >= low:
@@ -115,6 +123,10 @@ def minEatingSpeed(piles, h):
 
 
 def searchMatrix(matrix, target):
+    #search a 2D matrix for a given val.
+    #2d matrix is in order such that each the last element of a row 
+    #is less than the first element of the next row
+    #(in complete numeric order)
     ROWS,COL = len(matrix), len(matrix[0])
     top, bot = 0 , ROWS - 1
     #determine which row the value could possibly be in
@@ -156,6 +168,10 @@ def searchMatrix(matrix, target):
 
 
 def findMin(nums):
+    #find minimum value in a rotated array.
+    #rotated looks like this: [3,4,5,1,2]
+    #in numeric order, but not L-R across the array.
+    #the zero point is shifted.
         low = 0
         high = len(nums) - 1
         #set current min to inf to start.
@@ -176,11 +192,10 @@ def findMin(nums):
         return min(current_min,nums[low])
 
 
-
-
-#print(locate_card_brute(**test['inputs']) == test['output'])
+#Printing functions for debug.
+#print(brute_search(**test['inputs']) == test['output'])
 #print(binary_search(**test['inputs']) == test['output'])
 #print(rotated_binary_search(**test['inputs']) == test['output'])
 # print(minEatingSpeed(**testNanners['inputs']))
 # print(searchMatrix(**test2dMatrix['inputs']))
-print(findMin(**testFindMin['inputs']))
+# print(findMin(**testFindMin['inputs']))
