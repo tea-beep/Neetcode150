@@ -6,6 +6,7 @@ import math
 
 
 ##functions
+#************** EASY #**************
 def isAnagram(s, t):
     #one line solution, just check if the two sorted
     #arrays are equal.
