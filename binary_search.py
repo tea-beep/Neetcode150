@@ -45,7 +45,7 @@ def brute_search(nums, target):
         if i == len(nums):
             return -1
 
-
+#************** EASY #**************
 def binary_search(nums,target):
     #simple binary search!
     #need to find midpoint of the length of cards as starting check
@@ -63,6 +63,8 @@ def binary_search(nums,target):
             lo = mid + 1
     #not found in array!
     return -1
+
+#************** MEDIUM #**************
 
 
 def rotated_binary_search(nums,target):
